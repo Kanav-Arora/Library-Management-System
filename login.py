@@ -3,7 +3,7 @@ from PIL import ImageTk,Image
 import backend
 
 root = Tk()
-root.title("Login Page")
+root.title("Login")
 root.geometry("600x500")
 root.resizable(0,0)
 
@@ -15,7 +15,7 @@ myFrame = LabelFrame(root,bg="#3b404e", text = "Account Login",bd=3, fg = "white
 myFrame.place(relx = 0.5, rely = 0.5, relwidth = 0.7, relheight = 0.6, anchor = CENTER)
 
 # User ID Label
-ID = Label(myFrame, text = "ID:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 20, pady = 20)
+ID = Label(myFrame, text = "Username:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 20, pady = 20)
 ID.grid(row = 0, column = 0, padx= 15, pady = 20)
 
 # User Password Label
