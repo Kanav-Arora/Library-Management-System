@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from PIL import ImageTk,Image
 import backend
 
@@ -40,11 +41,11 @@ def value():
     global passEnter
     idval = idEnter.get()
     passval = passEnter.get()
-    # out = backend.login_data(idEnter,passEnter)
-    # if out==True:
-    #     print("Welcome")
-    # else:
-    #     print("Invalid credentials")
+    out = backend.login_data(idval,passval)
+    if out==1:
+        messagebox.showinfo("Success","Welcome")
+    else:
+        messagebox.showinfo("Failed","Invalid Credentials")
 
 
 # Login Button

@@ -27,10 +27,6 @@ addBook.grid(row = 0,padx = 160, pady = 8, sticky = "nesw")
 deleteBook = Button(myFrame,text = "Delete Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE)
 deleteBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
 deleteBook.grid(row = 1, padx = 160, pady = 8, sticky = "nesw")
-# 	View Book List
-# 	Issue Book
-# 	Return Book
-# 	Defaulter Identification
 
 viewBook = Button(myFrame,text = "View Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE)
 viewBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
