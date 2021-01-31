@@ -6,13 +6,14 @@ A `Python` project as the name suggests a **Library Management System.** For tho
 
 Frames are linked in the following order: <br>
 
-- Login Page <br>
-- Registration Page <br>
+- Login Page
+- Registration Page
 - Home Page <br>
   Home page is linked to following frames
 
       * Add Book
       * Delete Book
+      * View Books
       * Issue Book
       * Return Book
       * Defaulters
