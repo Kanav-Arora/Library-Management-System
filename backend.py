@@ -23,7 +23,8 @@ def add_book(sr, name, author, date, price, category, status = "yes"):
     x = collection.insert_one(dict1)
 
 # test
-# add_book("B1","Harry Puttar", "J.K Rowling", "2020-01-30",700, "Fiction")
+# add_book("B1","Harry Puttar", "J.K Rowling", "2021-01-15",700, "Fiction")
+# add_book("B2","catcher in the rye", "n.a", "2021-01-15",700, "Fiction")
 "---------------------------------------------------------------------------------------------"
 
 
@@ -67,7 +68,8 @@ def issue_book(sr, student, date):
         x = collection.insert_one(dict1)
 
 # test
-# issue_book("B1","kanav","2020-01-31")
+# issue_book("B1","kanav","2021-01-20")
+# issue_book("B2","arnav","2021-02-02")
 "---------------------------------------------------------------------------------------------"
 
 
@@ -84,5 +86,34 @@ def return_book(sr):
 
 
 "----------------------------------Defaulter--------------------------------------------------"
-
+def defaulter():
+    collection1 = database["defaulters"]
+    collection2 = database["issued_book"]
+    collection3 = database["book_list"]
+    today = datetime.datetime.now()
+    print(today)
+    x = collection2.find({})
+    # dictionaries of issued books (i)
+    for i in x:
+        due = i["due date"]
+        duedate = datetime.datetime.strptime(due, "%Y-%m-%d")
+        if duedate<today:
+            y = collection1.find({})
+            # dictionaries of defaulters (j)
+            flag = True
+            for j in y:
+                if j["serial number"]==i["serial number"]:
+                    flag = False
+            if flag==True:
+                k = collection3.find({})
+                bookname = ""
+                for m in k:
+                    if m["serial number"]==i["serial number"]:
+                        bookname = m["name"]
+                date1  = datetime.datetime.strptime(i["due date"], '%Y-%m-%d')
+                delta = today - date1
+                fine = delta.days * 5
+                dict1 = {"serial number":i["serial number"], "book name":bookname , "defaulter name": i["student name"], "due date": i["due date"], "number of days": delta.days, "fine" : fine }
+                z = collection1.insert_one(dict1)
+# defaulter()
 "---------------------------------------------------------------------------------------------"
