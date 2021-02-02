@@ -16,7 +16,7 @@ root.geometry("600x500")
 root.resizable(0,0)
 
 #putting background image
-back_ground=ImageTk.PhotoImage(Image.open("C:/Users/surbh/python_projects/0_mMD5SlIbFvgkGo3l.jpeg"))
+back_ground=ImageTk.PhotoImage(Image.open("images/0_mMD5SlIbFvgkGo3l.jpeg"))
 back_ground_label=Label(root, image=back_ground)
 back_ground_label.place(x=0, y=0, relwidth=1, relheight=1)
 
@@ -57,7 +57,7 @@ entry_box_book.grid(row = 1, column = 1, padx= 50, pady = 5)
 
 
 #importing button image, resizing it, creating an alias name
-button_image=Image.open("C:/Users/surbh/python_projects/Rounded Button.png")
+button_image=Image.open("images/Rounded Button.png")
 button_image=button_image.resize((110,40),Image.ANTIALIAS)
 rounded_button=ImageTk.PhotoImage(button_image)
 
