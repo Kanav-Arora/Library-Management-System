@@ -203,6 +203,17 @@ root.title("Login")
 root.geometry("600x500")
 root.resizable(0,0)
 
+window_height = 500
+window_width = 600
+
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+x_cordinate = int((screen_width/2) - (window_width/2))
+y_cordinate = int((screen_height/2) - (window_height/2))
+
+root.geometry("{}x{}+{}+{}".format(window_width, window_height, x_cordinate, y_cordinate))
+
 bg = ImageTk.PhotoImage(Image.open("images/0_mMD5SlIbFvgkGo3l.jpeg"))
 myLabel = Label(root,image = bg)
 myLabel.place(x=0,y=0,relwidth=1,relheight=1)
