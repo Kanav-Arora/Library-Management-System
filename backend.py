@@ -32,7 +32,7 @@ def add_book(sr, name, author, date, price, category, status = "yes"):
 def delete_book(sr, name):
     collection = database["book_list"]
     x = collection.delete_one({"serial number":sr})
-
+    
 # test
 # delete_book("B1", "Harry Puttar")
 "---------------------------------------------------------------------------------------------"

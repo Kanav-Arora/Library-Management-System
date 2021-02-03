@@ -7,6 +7,7 @@ As input from user it takes:
 """
 from tkinter import *
 from PIL import ImageTk,Image
+import backend
 
 #creating window, giving title and size
 root=Tk()
@@ -30,10 +31,14 @@ def delete():
     name_book.grid_forget()
     entry_box_book.grid_forget()
     next_button.grid_forget()
+    
+    backend.delete_book(entry_box_sno.get(),entry_box_book.get())
 
     label_1= Label(frame_1, text ="\n\nSerial no. : "+entry_box_sno.get()+"\nBook Name : "+entry_box_book.get()+"\nis successfully deleted from the record.", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), width=35, anchor="center")
     label_1.grid(row = 0, column = 0, padx=60, pady=5)
     
+    
+
     #next button for going to the next step
     next_button_1=Button(frame_1, image=rounded_button, borderwidth=0)
     next_button_1.grid(row = 1, column = 0, pady=30)
