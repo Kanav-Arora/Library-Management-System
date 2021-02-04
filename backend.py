@@ -31,7 +31,18 @@ def add_book(sr, name, author, date, price, category, status = "yes"):
 "---------------------------------Delete Book-------------------------------------------------"
 def delete_book(sr, name):
     collection = database["book_list"]
-    x = collection.delete_one({"serial number":sr})
+    x = collection.count_documents({"serial number":sr})
+    y = collection.delete_one({"serial number":sr})
+    collection = database["defaulters"]
+    y = collection.delete_one({"serial number":sr})
+    collection = database["issued_book"]
+    y = collection.delete_one({"serial number":sr})
+    if x==1:
+        return True
+    else:
+        return False
+    
+    
     
 # test
 # delete_book("B1", "Harry Puttar")
@@ -51,21 +62,33 @@ def view_book():
 "---------------------------------Issue Book-------------------------------------------------"
 def issue_book(sr, student, date):
     collection = database["book_list"]
-    x = collection.find({"$expr":{"$eq":["$serial number",sr]}},{"available":1,"_id":0})
+    x = collection.count_documents({"$expr":{"$eq":["$serial number",sr]}})
     value = True
-    for i in x:
-        # dictionary which will either be {'available':'yes'} or {'available':'no'}
-        if i=={"available":"yes"}:
-            value = True
-        else:
-            value= False
+    if x==1:
+        x = collection.find({"$expr":{"$eq":["$serial number",sr]}},{"available":1,"_id":0})
+        
+        for i in x:
+            # dictionary which will either be {'available':'yes'} or {'available':'no'}
+            if i=={"available":"yes"}:
+                value = True
+            else:
+                value= False
+    else:
+        value= False
     if value==True:
-        x = collection.update_one({"serial number":sr},{"$set":{"available":"no"}}) 
+        x = collection.update_one({"serial number":sr},{"$set":{"available":"no"}})
+        y = collection.find({"$expr":{"$eq":["$serial number",sr]}})
+        bookname = ""
+        for i in y:
+            bookname = i["name"]
         collection = database["issued_book"]
         due = datetime.datetime.strptime(date, '%Y-%m-%d')+ datetime.timedelta(days=7)
         duedate = datetime.datetime.strptime(str(due), "%Y-%m-%d %H:%M:%S")
         dict1 = {"serial number":sr, "student name":student, "issue date": date, "due date": str(duedate.date()) }
         x = collection.insert_one(dict1)
+        return True,bookname
+    else:
+        return False, ""
 
 # test
 # issue_book("B1","kanav","2021-01-20")
