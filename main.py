@@ -206,7 +206,7 @@ def delete_window(round):
         label_1.grid(row = 1, column = 0, padx=60, pady=5)
         
         #next button for going to the next step
-        next_button_1=Button(myFrame, image=rounded_button, borderwidth=0, command = home_window(round))
+        next_button_1=Button(myFrame, image=rounded_button, borderwidth=0, command = lambda: home_window(round))
         next_button_1.grid(row = 2, column = 0, pady=30)
         next_button_1.config(highlightthickness=0)
 
@@ -237,12 +237,12 @@ def delete_window(round):
 
 
 "--------------------------------------------------------Issue Book Window---------------------------------------------------------------------------"
-def issue_window():
+def issue_window(round):
     myFrame.config(text= "Issue Book")
     for child in myFrame.winfo_children():
             child.destroy()
 
-    def issue(rounded):
+    def issuewindow2(round):
         serial = entry_sno.get()
         name = entry_name.get()
         date = entry_date.get()
@@ -258,8 +258,7 @@ def issue_window():
             label_1.grid(row = 0, column = 0, padx=60, pady=5)
 
         #next button for going to the next step
-        next_button_1=Button(myFrame, text = "Next",borderwidth=2,bg = "#3b404e", fg = "white",command=home_window, relief= GROOVE)
-        next_button_1.config(highlightthickness=2, highlightbackground="#000000", highlightcolor="#000000")
+        next_button_1=Button(myFrame, image = round,borderwidth=2,bg = "#3b404e", fg = "white",relief= GROOVE,command= lambda: home_window(round))
         next_button_1.grid(row = 1, column = 0, pady=30)
                 
 
@@ -287,13 +286,8 @@ def issue_window():
     entry_date=Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white")
     entry_date.grid(row = 2, column = 1, padx= 50, pady = 5)
 
-    #importing button image, resizing it, creating an alias name
-    button_image=Image.open("images/Rounded Button.png")
-    button_image=button_image.resize((110,40),Image.ANTIALIAS)
-    rounded_button=ImageTk.PhotoImage(button_image)
-
     #next button for going to the next step
-    next_button=Button(myFrame, image=rounded_button, borderwidth=0, bg = "#3b404e", command = lambda: issue(rounded_button))
+    next_button=Button(myFrame, image=round, borderwidth=0, bg = "#3b404e", command = lambda: issuewindow2(round))
     next_button.grid(row = 3, column = 0, columnspan = 2, pady = 5)
     next_button.config(highlightthickness=0)
 
@@ -309,14 +303,26 @@ def return_window(round):
     for child in myFrame.winfo_children():
             child.destroy()
 
-    def return2(round):
+    def return_window2(round):
+        serial = book_id_Enter.get()
+        name = student_name_Enter.get()
         for child in myFrame.winfo_children():
             child.destroy()
+
+        value, number = backend.return_book(serial)
+        message = Label(myFrame,relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), width=35, anchor="center")
+        if value==1:
+            message.config(text = "The book with serial number: "+number+"\nhas been returned by "+name+".")
+        else:
+            message.config(text = "The book of serial number: "+number+"\nis not in the database.")
         
+        message.grid(row = 0, column = 0, padx=60, pady=5)
+
         #next button for going to the next step
-        next_button_1=Button(myFrame, image = round,borderwidth=2,bg = "#3b404e", fg = "white",command=home_window(round), relief= GROOVE)
-        next_button_1.config(highlightthickness=2, highlightbackground="#000000", highlightcolor="#000000")
+        next_button_1=Button(myFrame, image = round,borderwidth=2,bg = "#3b404e", fg = "white", relief= GROOVE,command= lambda: home_window(round))
         next_button_1.grid(row = 1, column = 0, pady=30)
+        
+
 
     # Name Of Student Label
     student_name = Label(myFrame, text = "Name of student:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 20, pady = 15)
@@ -335,7 +341,7 @@ def return_window(round):
     book_id_Enter.grid(row = 1, column = 1, padx= 50, pady = 5)
    
     #next button for going to the next step
-    next_button=Button(myFrame, image=round, borderwidth=0, bg = "#3b404e", command= lambda: return2(round))
+    next_button=Button(myFrame, image=round, borderwidth=0, bg = "#3b404e", command= lambda: return_window2(round))
     next_button.grid(row = 2, column = 0, columnspan = 2, pady = 15)
     next_button.config(highlightthickness=0)
 
@@ -369,6 +375,6 @@ button_image=button_image.resize((110,40),Image.ANTIALIAS)
 rounded_button=ImageTk.PhotoImage(button_image)
 
 login_window(rounded_button)
-# return_window(rounded_button)
+
 
 root.mainloop()

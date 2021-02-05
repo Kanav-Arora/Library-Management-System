@@ -99,9 +99,14 @@ def issue_book(sr, student, date):
 "---------------------------------Return Book-------------------------------------------------"
 def return_book(sr):
     collection = database["issued_book"]
-    x = collection.delete_one({"serial number":sr})
-    collection = database["book_list"]
-    x = collection.update_one({"serial number":sr},{"$set":{"available":"yes"}}) 
+    y = collection.count_documents({"$expr":{"$eq":["$serial number",sr]}})
+    if y==1:
+        x = collection.delete_one({"serial number":sr})
+        collection = database["book_list"]
+        x = collection.update_one({"serial number":sr},{"$set":{"available":"yes"}}) 
+        return True, sr
+    else:
+        return False, " "
 
 # test
 # return_book("B1")
