@@ -5,7 +5,7 @@ import backend
 
 "--------------------------------------------------------Login Window---------------------------------------------------------------------------"
 
-def login_window():
+def login_window(round):
 
     myFrame.config(text= "Login")
 
@@ -28,31 +28,25 @@ def login_window():
     passEnter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white")
     passEnter.grid(row = 1, column = 1, padx= 50, pady = 5)
 
-    # #importing button image, resizing it, creating an alias name
-    # button_image=Image.open("images/Rounded Button.png")
-    # button_image=button_image.resize((110,40),Image.ANTIALIAS)
-    # rounded_button=ImageTk.PhotoImage(button_image)
-
     def value(idEnter, passEnter):
-        # global idEnter
-        # global passEnter
+
         idval = idEnter.get()
         passval = passEnter.get()
         out = backend.login_data(idval,passval)
         if out==1:
             messagebox.showinfo("Success","Welcome")
-            home_window()
+            home_window(round)
         else:
             messagebox.showinfo("Failed","Invalid Credentials")
 
 
     # Login Button
-    loginButton = Button(myFrame, text = "Next", borderwidth = 0, bg = "#3b404e",fg = "white",command= lambda: value(idEnter,passEnter))
+    loginButton = Button(myFrame, image = round, borderwidth = 0, bg = "#3b404e",fg = "white",command= lambda: value(idEnter,passEnter))
     loginButton.grid(row = 2, column = 0, columnspan = 2, padx= 50, pady = 30)
     loginButton.config(highlightthickness=0)
 
     # registration button
-    register = Button(myFrame, text = "Create new account", fg = "white", bg = "#3b404e", relief = FLAT, command= register_window)
+    register = Button(myFrame, text = "Create new account", fg = "white", bg = "#3b404e", relief = FLAT, command= lambda: register_window(round))
     register.grid(row = 3, column = 0, columnspan = 2, padx= 50)
     register.config(highlightthickness=0)
 
@@ -62,7 +56,7 @@ def login_window():
 "--------------------------------------------------------Register Window---------------------------------------------------------------------------"
 
 
-def register_window():
+def register_window(round):
 
     myFrame.config(text= "Register")
 
@@ -86,10 +80,6 @@ def register_window():
     passEnter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white")
     passEnter.grid(row = 1, column = 1, padx= 50, pady = 5)
 
-    # rounded button 
-    # image =Image.open("images/Rounded Button.png")
-    # image = image.resize((110, 40), Image.ANTIALIAS)
-    # rounded = ImageTk.PhotoImage(image)
 
     def validity(idEnter, passEnter):
         list1 = list(idEnter)
@@ -138,12 +128,12 @@ def register_window():
             messagebox.showinfo("Failed",check)
 
     # account creation
-    loginButton = Button(myFrame, text = "Next", borderwidth = 0, command= lambda: value(idEnter,passEnter))
+    loginButton = Button(myFrame, image = round, borderwidth = 0, command= lambda: value(idEnter,passEnter))
     loginButton.grid(row = 2, column = 0, columnspan = 2, padx= 50, pady = 30)
     loginButton.config(highlightthickness=0)
 
     # login frame
-    register = Button(myFrame, text = "Sign in", fg = "white", bg = "#3b404e", relief = FLAT, command= login_window)
+    register = Button(myFrame, text = "Sign in", fg = "white", bg = "#3b404e", relief = FLAT, command= lambda: login_window(round))
     register.grid(row = 3, column = 0, columnspan = 2, padx= 50)
     register.config(highlightthickness=0)    
 
@@ -152,7 +142,7 @@ def register_window():
 
 "--------------------------------------------------------Home Window---------------------------------------------------------------------------"
 
-def home_window():
+def home_window(round):
     myFrame.config(text= "Home Window")
 
     for child in myFrame.winfo_children():
@@ -162,7 +152,7 @@ def home_window():
     addBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
     addBook.grid(row = 0,padx = 160, pady = 8, sticky = "nesw")
 
-    deleteBook = Button(myFrame,text = "Delete Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE, command = delete_window)
+    deleteBook = Button(myFrame,text = "Delete Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE, command = lambda:delete_window(round))
     deleteBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
     deleteBook.grid(row = 1, padx = 160, pady = 8, sticky = "nesw")
 
@@ -170,11 +160,11 @@ def home_window():
     viewBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
     viewBook.grid(row = 2, padx = 160, pady = 8, sticky = "nesw")
 
-    issueBook = Button(myFrame,text = "Issue Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE, command=issue_window)
+    issueBook = Button(myFrame,text = "Issue Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE, command=lambda: issue_window(round))
     issueBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
     issueBook.grid(row = 3, padx = 160, pady = 8, sticky = "nesw")
 
-    returnBook = Button(myFrame,text = "Return Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE)
+    returnBook = Button(myFrame,text = "Return Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE,command = lambda: return_window(round))
     returnBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
     returnBook.grid(row = 4, padx = 160, pady = 8, sticky = "nesw")
 
@@ -187,13 +177,13 @@ def home_window():
 
 "--------------------------------------------------------Delete Book Window---------------------------------------------------------------------------"
 
-def delete_window():
+def delete_window(round):
     myFrame.config(text= "Delete Book")
 
     for child in myFrame.winfo_children():
         child.destroy()
     
-    def delete():
+    def delete(round):
         sno.grid_forget()
         entry_box_sno.grid_forget()
         name_book.grid_forget()
@@ -216,7 +206,7 @@ def delete_window():
         label_1.grid(row = 1, column = 0, padx=60, pady=5)
         
         #next button for going to the next step
-        next_button_1=Button(myFrame, image=rounded_button, borderwidth=0, command = home_window)
+        next_button_1=Button(myFrame, image=rounded_button, borderwidth=0, command = home_window(round))
         next_button_1.grid(row = 2, column = 0, pady=30)
         next_button_1.config(highlightthickness=0)
 
@@ -237,13 +227,8 @@ def delete_window():
     entry_box_book.grid(row = 1, column = 1, padx= 50, pady = 5)
 
 
-    #importing button image, resizing it, creating an alias name
-    button_image=Image.open("images/Rounded Button.png")
-    button_image=button_image.resize((110,40),Image.ANTIALIAS)
-    rounded_button=ImageTk.PhotoImage(button_image)
-
     #next button for going to the next step
-    next_button=Button(myFrame, image=rounded_button, borderwidth=0, command=delete)
+    next_button=Button(myFrame, image=round, borderwidth=0, command=lambda: delete(round))
     next_button.grid(row = 2, column = 0, columnspan = 2, pady=30)
     next_button.config(highlightthickness=0)
 
@@ -316,6 +301,46 @@ def issue_window():
 "----------------------------------------------------------------------------------------------------------------------------------------------------"
 
 
+"--------------------------------------------------------Return Book Window---------------------------------------------------------------------------"
+def return_window(round):
+
+    myFrame.config(text= "Return Book")
+
+    for child in myFrame.winfo_children():
+            child.destroy()
+
+    def return2(round):
+        for child in myFrame.winfo_children():
+            child.destroy()
+        
+        #next button for going to the next step
+        next_button_1=Button(myFrame, image = round,borderwidth=2,bg = "#3b404e", fg = "white",command=home_window(round), relief= GROOVE)
+        next_button_1.config(highlightthickness=2, highlightbackground="#000000", highlightcolor="#000000")
+        next_button_1.grid(row = 1, column = 0, pady=30)
+
+    # Name Of Student Label
+    student_name = Label(myFrame, text = "Name of student:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 20, pady = 15)
+    student_name.grid(row = 0, column = 0, padx= 15, pady = 20)
+
+    # BOOK ID Label
+    book_id = Label(myFrame, text = "Book ID:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 20, pady = 15)
+    book_id.grid(row = 1, column = 0, padx= 15, pady = 20)
+
+    # Name Of Student field
+    student_name_Enter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg ="white",border=3)
+    student_name_Enter.grid(row = 0, column = 1, padx= 50, pady = 5)
+
+    # BOOK ID field
+    book_id_Enter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white",border=3)
+    book_id_Enter.grid(row = 1, column = 1, padx= 50, pady = 5)
+   
+    #next button for going to the next step
+    next_button=Button(myFrame, image=round, borderwidth=0, bg = "#3b404e", command= lambda: return2(round))
+    next_button.grid(row = 2, column = 0, columnspan = 2, pady = 15)
+    next_button.config(highlightthickness=0)
+
+"----------------------------------------------------------------------------------------------------------------------------------------------------"
+
 root = Tk()
 root.title("Login")
 root.geometry("600x500")
@@ -339,8 +364,11 @@ myLabel.place(x=0,y=0,relwidth=1,relheight=1)
 myFrame = LabelFrame(root,bg="#3b404e", text = "Account Login",bd=3, fg = "white", padx=5, pady=5, labelanchor = "n")
 myFrame.place(relx = 0.5, rely = 0.5, relwidth = 0.7, relheight = 0.6, anchor = CENTER)
 
+button_image=Image.open("images/Rounded Button.png")
+button_image=button_image.resize((110,40),Image.ANTIALIAS)
+rounded_button=ImageTk.PhotoImage(button_image)
 
-
-login_window()
+login_window(rounded_button)
+# return_window(rounded_button)
 
 root.mainloop()
