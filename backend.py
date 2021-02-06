@@ -20,7 +20,14 @@ def login_data(username,password):
 def add_book(sr, name, author, date, price, category, status = "yes"):
     collection = database["book_list"]
     dict1 = {"serial number": sr, "name": name, "author": author, "date": date, "price":price, "category": category, "available":status}
-    x = collection.insert_one(dict1)
+    x = collection.count_documents({"$expr":{"$eq":["$serial number",sr]}})
+    if x==0:
+        x = collection.insert_one(dict1)
+        return True
+        # true if book doesn't exists and it is successfully added
+    else:
+        return False
+        # false if book with same serial number already exists
 
 # test
 # add_book("B1","Harry Puttar", "J.K Rowling", "2021-01-15",700, "Fiction")
