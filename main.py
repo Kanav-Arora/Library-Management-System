@@ -348,10 +348,11 @@ def return_window(round):
 "----------------------------------------------------------------------------------------------------------------------------------------------------"
 
 
-"--------------------------------------------------------Return Book Window---------------------------------------------------------------------------"
+"--------------------------------------------------------Defaulter Window---------------------------------------------------------------------------"
 
 def modes(round):
-
+    for child in myFrame.winfo_children():
+        child.destroy()
     r = IntVar()          #integer variable 
 
     #label asking for the fault
@@ -381,24 +382,23 @@ def table(round, radio_button_1, radio_button_2):
         line = Label(myFrame, text = "----------------------------------------------------------------------------", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), width = 49, anchor = 'w')
         line.grid (row = 4, column = 0, columnspan = 2, pady = 5)
 
-        cur = [
-        ['A1','Arnav Batra','17-01-2001','100'],
-        ['B1','Kanav Arora','15-05-2002','100'],
-        ['C1','Kushagra Sinha','19-04-2002','100'],
-        ['D1','Satvik Jalan','15-12-2001','100'],
-        ['E1','Surbhi Goel','10-08-2002','100'] ]
-
+        # cur = [
+        # ['A1','Arnav Batra','17-01-2001','100'],
+        # ['B1','Kanav Arora','15-05-2002','100'],
+        # ['C1','Kushagra Sinha','19-04-2002','100'],
+        # ['D1','Satvik Jalan','15-12-2001','100'],
+        # ['E1','Surbhi Goel','10-08-2002','100'] ]
+        res = backend.defaulter()
         try:
-            global y
-            y = 5
-
-            for i in cur:
+            for i in res:
+                global y
+                y = 5
                 def_list = Label(myFrame, text= "%-10s%-25s%-15s%-10s"%(i[0],i[1],i[2],i[3]) , relief = RAISED, fg = "white", bg ="#3b404e", bd = 0 , font = ("Calibri",12))
                 def_list.grid(row = y, column = 0, columnspan = 2, pady=1)
                 y += 1
-            
+                
         except:
-            messagebox.showinfo("Failed to fetch files from database")
+            messagebox.showinfo("Failed","Unable to fetch files from database")
 
         #next button for going to the next step
         #this will take you to main menu
@@ -473,19 +473,6 @@ def booklost(round, radio_button_1, radio_button_2):
         radio_button_4 = Radiobutton(myFrame, text = "add new book", font = ("Calibri",12), width = 20, fg = "white", bg = "#3b404e", selectcolor = "#3b404e", activebackground = "#3b404e", anchor = "center", variable = r_2, value = 4, command = disable_2)
         radio_button_4.grid(row = 6, column = 1, pady = 5)
     
-
-# #function for disabling the other radio button when one is selected
-# def disable():
-
-#     if r.get()==1:
-        
-
-
-#     else:
-        
-
-
-
 "----------------------------------------------------------------------------------------------------------------------------------------------------"
 
 
@@ -516,8 +503,8 @@ button_image=Image.open("images/Rounded Button.png")
 button_image=button_image.resize((110,40),Image.ANTIALIAS)
 rounded_button=ImageTk.PhotoImage(button_image)
 
-# login_window(rounded_button)
-modes(rounded_button)
+login_window(rounded_button)
+# modes(rounded_button)
 
 
 root.mainloop()
