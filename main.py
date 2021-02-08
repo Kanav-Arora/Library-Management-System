@@ -382,12 +382,6 @@ def table(round, radio_button_1, radio_button_2):
         line = Label(myFrame, text = "----------------------------------------------------------------------------", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), width = 49, anchor = 'w')
         line.grid (row = 4, column = 0, columnspan = 2, pady = 5)
 
-        # cur = [
-        # ['A1','Arnav Batra','17-01-2001','100'],
-        # ['B1','Kanav Arora','15-05-2002','100'],
-        # ['C1','Kushagra Sinha','19-04-2002','100'],
-        # ['D1','Satvik Jalan','15-12-2001','100'],
-        # ['E1','Surbhi Goel','10-08-2002','100'] ]
         res = backend.defaulter()
         try:
             for i in res:
@@ -415,36 +409,36 @@ def booklost(round, radio_button_1, radio_button_2):
 
         #label asking for name of defaulter
         name = Label(myFrame, text = "Name of Defaulter:", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), padx= 40, pady = 10)
-        name.grid(row = 3, column = 0)
+        name.grid(row = 4, column = 0)
 
         #entry box to type the name of defaulter
         entry_box_name = Entry(myFrame, highlightbackground = "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white")
-        entry_box_name.grid(row = 3, column = 1)
+        entry_box_name.grid(row = 4, column = 1)
 
         #label asking for name of book
-        name_book = Label(myFrame, text = "Name of Book:", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), padx= 40, pady = 10)
-        name_book.grid(row = 4, column = 0)
+        serial = Label(myFrame, text = "Serial number:", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), padx= 40, pady = 10)
+        serial.grid(row = 3, column = 0)
 
         #entry box to type the name of book
-        entry_box_book = Entry(myFrame, highlightbackground = "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white")
-        entry_box_book.grid(row = 4, column = 1)
+        entry_serial = Entry(myFrame, highlightbackground = "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white")
+        entry_serial.grid(row = 3, column = 1)
 
         r_2 = IntVar()       #integer variable
 
-        def disable_2():
+        def disable_2(round):
+            
+            
             if r_2.get()==3:
                 radio_button_4.deselect
-
-                global price
-                price='100'
+                name = entry_box_name.get()
+                sr = entry_serial.get()
+                price = backend.price(sr)
 
                 #label to display original price        
-                label_1 = Label(myFrame, text = "Origial price to be paid: Rs."+price+"\n", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), width=46, anchor = 'center')
+                label_1 = Label(myFrame, text = name + " is fined for Rs."+str(price)+"\n", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), width=46, anchor = 'center')
                 label_1.grid(row = 7, column = 0, columnspan = 2, padx = 20, pady = 2)
 
-                #next button for going to the next step
-                #this will take you back to main menu
-                next_button_1 = Button(myFrame, image = round, borderwidth = 0)
+                next_button_1 = Button(myFrame, image = round, borderwidth = 0, command = lambda: home_window(round))
                 next_button_1.grid(row = 8, column = 0, columnspan = 2, pady = 8)
                 next_button_1.config(highlightthickness = 0)
 
@@ -455,22 +449,23 @@ def booklost(round, radio_button_1, radio_button_2):
                 label_2 = Label(myFrame, text = "To add new book details and delete current book details\n click on next", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12))
                 label_2.grid(row = 7, column = 0, columnspan = 2, padx = 5, pady = 2)
 
-                #next button for going to the next step
-                #this button will take you to add book details
-                next_button_2 = Button(myFrame, image = round, borderwidth = 0)
-                next_button_2.grid(row = 8, column = 0, columnspan = 2, pady = 8)
-                next_button_2.config(highlightthickness = 0)
+                next_button_1 = Button(myFrame, image = round, borderwidth = 0)
+                next_button_1.grid(row = 8, column = 0, columnspan = 2, pady = 8)
+                next_button_1.config(highlightthickness = 0)
+
+
+
 
         #label asking for choice
         option = Label(myFrame, text = "Options:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), width = 5, anchor = 'center')
         option.grid(row = 5, column = 0,padx = 40, pady= 5, sticky='news')
 
         #radio button 3 for pay price
-        radio_button_3 = Radiobutton(myFrame, text = "pay original price", font = ("Calibri",12), width = 22, fg = "white", bg = "#3b404e",selectcolor = "#3b404e", activebackground = "#3b404e", variable = r_2, value = 3, command = disable_2)
+        radio_button_3 = Radiobutton(myFrame, text = "pay original price", font = ("Calibri",12), width = 22, fg = "white", bg = "#3b404e",selectcolor = "#3b404e", activebackground = "#3b404e", variable = r_2, value = 3, command = lambda:  disable_2(round))
         radio_button_3.grid(row = 5, column = 1, pady = 5)
 
         #radio button 4 for add new book
-        radio_button_4 = Radiobutton(myFrame, text = "add new book", font = ("Calibri",12), width = 20, fg = "white", bg = "#3b404e", selectcolor = "#3b404e", activebackground = "#3b404e", anchor = "center", variable = r_2, value = 4, command = disable_2)
+        radio_button_4 = Radiobutton(myFrame, text = "add new book", font = ("Calibri",12), width = 20, fg = "white", bg = "#3b404e", selectcolor = "#3b404e", activebackground = "#3b404e", anchor = "center", variable = r_2, value = 4, command = lambda: disable_2(round))
         radio_button_4.grid(row = 6, column = 1, pady = 5)
     
 "----------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -503,8 +498,7 @@ button_image=Image.open("images/Rounded Button.png")
 button_image=button_image.resize((110,40),Image.ANTIALIAS)
 rounded_button=ImageTk.PhotoImage(button_image)
 
-login_window(rounded_button)
-# modes(rounded_button)
-
+# login_window(rounded_button)
+modes(rounded_button)
 
 root.mainloop()

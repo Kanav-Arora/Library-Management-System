@@ -1,3 +1,4 @@
+from typing import Collection
 import pymongo 
 import datetime
 uri = "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.ynusx.mongodb.net/admin?retryWrites=true&w=majority"
@@ -158,3 +159,14 @@ def defaulter():
     return final
 
 "---------------------------------------------------------------------------------------------"
+
+
+"----------------------------------Book Price--------------------------------------------------"
+def price(sr):
+    collection = database["book_list"]
+    x = collection.find({"$expr":{"$eq":["$serial number",sr]}})
+    for i in x:
+        return i["price"]
+
+"---------------------------------------------------------------------------------------------"
+
