@@ -111,12 +111,23 @@ def issue_book(sr, student, date):
 "---------------------------------Return Book-------------------------------------------------"
 def return_book(sr):
     collection = database["issued_book"]
+    collection2 = database["defaulters"]
     y = collection.count_documents({"$expr":{"$eq":["$serial number",sr]}})
     if y==1:
+        m = collection2.count_documents({"$expr":{"$eq":["$serial number",sr]}})
         x = collection.delete_one({"serial number":sr})
         collection = database["book_list"]
-        x = collection.update_one({"serial number":sr},{"$set":{"available":"yes"}}) 
-        return True, sr
+        x = collection.update_one({"serial number":sr},{"$set":{"available":"yes"}})
+        if m==0:
+            return True, sr
+        else:
+            x = collection2.find({"$expr":{"$eq":["$serial number",sr]}})
+            fine =0
+            for i in x:
+                fine = i["fine"]
+            x = collection2.delete_one({"serial number":sr})
+            return fine, sr
+
     else:
         return False, " "
 
@@ -154,7 +165,8 @@ def defaulter():
                 fine = delta.days * 5
                 dict1 = {"serial number":i["serial number"], "book name":bookname , "defaulter name": i["student name"], "due date": i["due date"], "number of days": delta.days, "fine" : fine }
                 z = collection1.insert_one(dict1)
-
+def defaulter_list():
+    collection1 = database["defaulters"]
     x = collection1.find({})
     final = []
     for i in x:

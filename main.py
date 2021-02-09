@@ -343,11 +343,12 @@ def return_window(round):
 
         value, number = backend.return_book(serial)
         message = Label(myFrame,relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), width=35, anchor="center")
-        if value==1:
-            message.config(text = "The book with serial number: "+number+"\nhas been returned by "+name+".")
-        else:
+        if value==True:
+            message.config(text = "The book with serial number: "+number+"\nhas been returned by "+name+".") 
+        elif type(value)!=bool:
+            message.config(text = "The book of serial number: "+number+"\nis a late return.\nKindly pay fine of Rs. "+ str(value))
+        elif value==False:
             message.config(text = "The book of serial number: "+number+"\nis not in the database.")
-        
         message.grid(row = 0, column = 0, padx=60, pady=5)
 
         #next button for going to the next step
@@ -415,7 +416,7 @@ def table(round, radio_button_1, radio_button_2):
         line = Label(myFrame, text = "----------------------------------------------------------------------------", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), width = 49, anchor = 'w')
         line.grid (row = 4, column = 0, columnspan = 2, pady = 5)
 
-        res = backend.defaulter()
+        res = backend.defaulter_list()
         try:
             for i in res:
                 global y
@@ -531,8 +532,8 @@ button_image=Image.open("images/Rounded Button.png")
 button_image=button_image.resize((110,40),Image.ANTIALIAS)
 rounded_button=ImageTk.PhotoImage(button_image)
 
-# login_window(rounded_button)
-# modes(rounded_button)
-view_window(rounded_button)
+login_window(rounded_button)
+
+
 
 root.mainloop()
