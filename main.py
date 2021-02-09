@@ -241,9 +241,14 @@ def view_window(round):
     
     myFrame.config(text= "View Book")
 
-    #Label
-    Label(myFrame, text="%-15s%-20s%-20s%-20s" % ('S.No','Title', 'Author', 'Status'),bg="#3b404e", fg='white', width=48).grid(pady=2, row=0)
-    Label(myFrame, text="--------------------------------------------------------------------", bg="#3b404e", fg='white').grid(pady=2, row=1, columnspan=4)
+    #title
+    title = Label(myFrame, text="%-15s%-20s%-20s%-20s" % ('S.No','Title', 'Author', 'Status'),relief  = RAISED, bg="#3b404e", fg='white', width=48, bd = 0 , font = ("Calibri",12))
+    title.grid(row = 0, column = 0, columnspan = 2, padx = 15, pady = 8)
+    
+    
+    # break line
+    line = Label(myFrame, text = "----------------------------------------------------------------------------", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), width = 49, anchor = 'w')
+    line.grid (row = 1, column = 0, columnspan = 2, pady = 5)
 
     my_list = backend.view_book()
 
@@ -251,7 +256,9 @@ def view_window(round):
     y = 3
     for i in my_list:
 
-        Label(myFrame, text="%-15s%-20s%-20s%-20s" % (i[0], i[1], i[2], i[3]), bg="#3b404e", fg='white', width=48).grid(pady=5, row=y)
+        # data label
+        data = Label(myFrame, text="%-15s%-20s%-20s%-20s" % (i[0], i[1], i[2], i[3]), bg="#3b404e", fg='white', width=48)
+        data.grid(row = y, column = 0, columnspan = 2, pady = 1)
         y += 1
 
     back_button = Button(myFrame, image = round, borderwidth = 0, anchor="center", command= lambda: home_window(round))
