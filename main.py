@@ -156,7 +156,7 @@ def home_window(round):
     deleteBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
     deleteBook.grid(row = 1, padx = 160, pady = 8, sticky = "nesw")
 
-    viewBook = Button(myFrame,text = "View Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE)
+    viewBook = Button(myFrame,text = "View Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE, command = lambda: view_window(round))
     viewBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
     viewBook.grid(row = 2, padx = 160, pady = 8, sticky = "nesw")
 
@@ -232,6 +232,31 @@ def delete_window(round):
     next_button.grid(row = 2, column = 0, columnspan = 2, pady=30)
     next_button.config(highlightthickness=0)
 
+
+"----------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+"--------------------------------------------------------View Book Window---------------------------------------------------------------------------"
+def view_window(round):
+    
+    myFrame.config(text= "View Book")
+
+    #Label
+    Label(myFrame, text="%-15s%-20s%-20s%-20s" % ('S.No','Title', 'Author', 'Status'),bg="#3b404e", fg='white', width=48).grid(pady=2, row=0)
+    Label(myFrame, text="--------------------------------------------------------------------", bg="#3b404e", fg='white').grid(pady=2, row=1, columnspan=4)
+
+    my_list = backend.view_book()
+
+    #try:
+    y = 3
+    for i in my_list:
+
+        Label(myFrame, text="%-15s%-20s%-20s%-20s" % (i[0], i[1], i[2], i[3]), bg="#3b404e", fg='white', width=48).grid(pady=5, row=y)
+        y += 1
+
+    back_button = Button(myFrame, image = round, borderwidth = 0, anchor="center", command= lambda: home_window(round))
+    back_button.grid(row = 7, padx=5, pady = 15)
+    back_button.config(highlightthickness=0)
 
 "----------------------------------------------------------------------------------------------------------------------------------------------------"
 
@@ -351,6 +376,7 @@ def return_window(round):
 "--------------------------------------------------------Defaulter Window---------------------------------------------------------------------------"
 
 def modes(round):
+    myFrame.config(text= "Defaulter")
     for child in myFrame.winfo_children():
         child.destroy()
     r = IntVar()          #integer variable 
@@ -499,6 +525,7 @@ button_image=button_image.resize((110,40),Image.ANTIALIAS)
 rounded_button=ImageTk.PhotoImage(button_image)
 
 # login_window(rounded_button)
-modes(rounded_button)
+# modes(rounded_button)
+view_window(rounded_button)
 
 root.mainloop()

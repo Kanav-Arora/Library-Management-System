@@ -61,7 +61,11 @@ def delete_book(sr, name):
 def view_book():
     collection = database["book_list"]
     x = collection.find({})
-    return x
+    final = []
+    for i in x:
+        ls = [i["serial number"], i["name"], i["author"], i["available"]]
+        final.extend([ls])
+    return final
 # test
 # view_book()
 "---------------------------------------------------------------------------------------------"
