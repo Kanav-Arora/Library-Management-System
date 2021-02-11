@@ -240,15 +240,17 @@ def delete_window(round):
 def view_window(round):
     
     myFrame.config(text= "View Book")
+    for child in myFrame.winfo_children():
+            child.destroy()
 
     #title
-    title = Label(myFrame, text="%-15s%-20s%-20s%-20s" % ('S.No','Title', 'Author', 'Status'),relief  = RAISED, bg="#3b404e", fg='white', width=48, bd = 0 , font = ("Calibri",12))
-    title.grid(row = 0, column = 0, columnspan = 2, padx = 15, pady = 8)
+    title = Label(myFrame, text="%-15s%-29s%-20s%-10s" % ('S.No','Title', 'Author','Status'),relief  = RAISED, bg="#3b404e", fg='white', width=45, anchor="center",bd = 0 , font = ("Calibri",12))
+    title.grid(row = 0, column = 0, columnspan = 2, padx = 10, pady = 8)
     
     
     # break line
-    line = Label(myFrame, text = "----------------------------------------------------------------------------", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), width = 49, anchor = 'w')
-    line.grid (row = 1, column = 0, columnspan = 2, pady = 5)
+    line = Label(myFrame, text = "----------------------------------------------------------------------------", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12), width = 49, anchor = 'center')
+    line.grid (row = 1, column = 0, columnspan = 2, padx = 5, pady = 5)
 
     my_list = backend.view_book()
 
@@ -257,12 +259,12 @@ def view_window(round):
     for i in my_list:
 
         # data label
-        data = Label(myFrame, text="%-15s%-20s%-20s%-20s" % (i[0], i[1], i[2], i[3]), bg="#3b404e", fg='white', width=48)
+        data = Label(myFrame, text="%-15s%-35s%-30s" % (i[0], i[1], i[2])+" "+i[3], bg="#3b404e", fg='white', width=50, anchor='w')
         data.grid(row = y, column = 0, columnspan = 2, pady = 1)
         y += 1
 
     back_button = Button(myFrame, image = round, borderwidth = 0, anchor="center", command= lambda: home_window(round))
-    back_button.grid(row = 7, padx=5, pady = 15)
+    back_button.grid(row = y+1, padx=5, pady = 8, columnspan = 2)
     back_button.config(highlightthickness=0)
 
 "----------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -506,7 +508,7 @@ def booklost(round, radio_button_1, radio_button_2):
 
 
 root = Tk()
-root.title("Login")
+root.title("Book Worm")
 root.geometry("600x500")
 root.resizable(0,0)
 
