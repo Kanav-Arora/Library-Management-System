@@ -143,12 +143,12 @@ def register_window(round):
 "--------------------------------------------------------Home Window---------------------------------------------------------------------------"
 
 def home_window(round):
-    myFrame.config(text= "Home Window")
+    myFrame.config(text= "Home Page")
 
     for child in myFrame.winfo_children():
         child.destroy()
 
-    addBook = Button(myFrame,text = "Add Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE, borderwidth= 2)
+    addBook = Button(myFrame,text = "Add Book", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE, borderwidth= 2, command =  lambda: add_window(round))
     addBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e")
     addBook.grid(row = 0,padx = 160, pady = 8, sticky = "nesw")
 
@@ -171,6 +171,102 @@ def home_window(round):
     defaulterBook = Button(myFrame,text = "Book Defaulters", fg = "#FFFFFF", bg = "#3b404e", relief = GROOVE)
     defaulterBook.config(highlightbackground = "#3b404e", highlightthickness = 2, highlightcolor= "#3b404e", command = lambda: modes(round))
     defaulterBook.grid(row = 5, padx = 160, pady = 8, sticky = "nesw")
+
+"----------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+"--------------------------------------------------------Add Book Window---------------------------------------------------------------------------"
+def add_window(round):
+
+    myFrame.config(text= "Add Book")
+
+    for child in myFrame.winfo_children():
+        child.destroy()
+
+    def add(round):
+        sr = book_id_Enter.get()
+        name = book_name_Enter.get()
+        author = author_name_Enter.get()
+        date = date_name_Enter.get()
+        price = price_name_Enter.get()
+        category = category_name_Enter.get()
+        for child in myFrame.winfo_children():
+            child.destroy()
+        
+        label_1 = Label(myFrame)
+
+        val = backend.add_book(sr, name, author, date, price, category)
+        if val==True:
+            
+            label_1.config(text ="\n\nSerial no. : "+sr+"\nBook Name : "+name+"\nis successfully added to the database.", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), width=35, anchor="center")
+            
+        elif val==False:
+            error = Label(myFrame, text = "Unsuccessful!!", fg = "white",relief = RAISED, bg = "#3b404e", bd=0 , font = ("Calibri",12), width=35, anchor="center", )
+            error.config(highlightbackground="red", highlightthickness=1)
+            label_1.config(text ="\n\nSerial no. : "+sr+"\nBook Name : "+name+"\nalready exists in the database.", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), width=35, anchor="center")
+            error.grid(row=0, column = 0, padx=60, pady=5)
+        label_1.grid(row = 1, column = 0, padx=60, pady=5)
+
+            # Login Button
+        loginButton = Button(myFrame, image = round, borderwidth = 0, command = lambda: home_window(round))
+        loginButton.grid(row = 6, column = 0, columnspan = 2, padx= 30, pady = 15)
+        loginButton.config(highlightthickness=0)
+
+
+    # Name of book Label
+    book_name = Label(myFrame, text = "Book Name:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 15)
+    book_name.grid(row = 0, column = 0, padx= 15, pady = 5)
+
+    # Name Of Author Label
+    author_name = Label(myFrame, text = "Name of Author:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 15)
+    author_name.grid(row = 2, column = 0,padx= 15, pady = 5)
+
+    # Date Label
+    date_name = Label(myFrame, text = "Date \n (DD/MM/YYYY):", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 15)
+    date_name.grid(row = 5, column = 0,padx= 15, pady = 5)
+
+    # Price Label
+    price_name = Label(myFrame, text = "Price:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 15)
+    price_name.grid(row = 4, column = 0, padx= 15, pady = 5)
+
+    # BOOK ID Label
+    book_id = Label(myFrame, text = "Book ID:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12))
+    book_id.grid(row = 1, column = 0, padx= 15, pady = 5)
+
+    # Category Label
+    category_name = Label(myFrame, text = "Category:", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12))
+    category_name.grid(row = 3, column = 0,padx= 15, pady = 5)
+
+    # Name Of Book field
+    book_name_Enter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg ="white",border=3)
+    book_name_Enter.grid(row = 0, column = 1, padx= 70, pady = 5)
+
+    # Name Of Author field
+    author_name_Enter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg ="white",border=3)
+    author_name_Enter.grid(row = 2, column = 1,padx= 70, pady = 5)
+
+    # BOOK ID field
+    book_id_Enter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white",border=3)
+    book_id_Enter.grid(row = 1, column = 1, padx= 70, pady = 5)
+
+    # Price field
+    price_name_Enter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white",border=3)
+    price_name_Enter.grid(row = 4, column = 1,padx= 70, pady = 5)
+
+    # Category field
+    category_name_Enter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white",border=3)
+    category_name_Enter.grid(row = 3, column = 1, padx= 70, pady = 5)
+
+    # Date field
+    date_name_Enter = Entry(myFrame, highlightbackground= "#3b404e", bg = "#3b404e", borderwidth = 2, fg = "white",border=3)
+    date_name_Enter.grid(row = 5, column = 1,padx= 70, pady = 5)
+
+    # Login Button
+    loginButton = Button(myFrame, image = round, borderwidth = 0, command = lambda: add(round))
+    loginButton.grid(row = 6, column = 0, columnspan = 2, padx= 30, pady = 15)
+    loginButton.config(highlightthickness=0)
+
+
 
 "----------------------------------------------------------------------------------------------------------------------------------------------------"
 
@@ -534,7 +630,8 @@ button_image=Image.open("images/Rounded Button.png")
 button_image=button_image.resize((110,40),Image.ANTIALIAS)
 rounded_button=ImageTk.PhotoImage(button_image)
 
-login_window(rounded_button)
+# login_window(rounded_button)
+add_window(rounded_button)
 
 
 
