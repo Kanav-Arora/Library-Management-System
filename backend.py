@@ -37,7 +37,7 @@ def add_book(sr, name, author, date, price, category, status = "yes"):
 
 
 "---------------------------------Delete Book-------------------------------------------------"
-def delete_book(sr, name):
+def delete_book(sr, name=""):
     collection = database["book_list"]
     x = collection.count_documents({"serial number":sr})
     y = collection.delete_one({"serial number":sr})

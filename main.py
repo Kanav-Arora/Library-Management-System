@@ -578,12 +578,18 @@ def booklost(round, radio_button_1, radio_button_2):
 
             else:
                 radio_button_3.deselect
+                def book_lost():
+                    name = entry_box_name.get()
+                    sr = entry_serial.get()
+                    val = backend.delete_book(sr)
+                    add_window(round)
+
 
                 #label to display message        
                 label_2 = Label(myFrame, text = "To add new book details and delete current book details\n click on next", relief = RAISED, fg = "white", bg = "#3b404e", bd = 0 , font = ("Calibri",12))
                 label_2.grid(row = 7, column = 0, columnspan = 2, padx = 5, pady = 2)
 
-                next_button_1 = Button(myFrame, image = round, borderwidth = 0)
+                next_button_1 = Button(myFrame, image = round, borderwidth = 0, command = book_lost)
                 next_button_1.grid(row = 8, column = 0, columnspan = 2, pady = 8)
                 next_button_1.config(highlightthickness = 0)
 
