@@ -93,7 +93,7 @@ def register_window(round):
         
         else:
         
-            low, up, special, digit = True, True, True, True
+            low, up, special, digit = 0,0,0,0
             if len(passEnter)>=8:
                 for i in passEnter:
                      
@@ -106,14 +106,15 @@ def register_window(round):
                     if (i.isdigit()): 
                         digit+=1            
             
-                    if(i=='@'or i=='$' or i=='_'): 
-                        special+=1 
-                if low>=1 and up>=1 and digit>=1 and special>=1 and low+up+digit+special==len(passEnter):
+                if low>=1 and up>=1 and digit>=1 and low+up+digit+special==len(passEnter):
                     return 1
                 else:
-                    return "Password should be of minimum length 8 and contain an uppercase, lowercase, special character(@,$,_) and should be alphanumeric."
+                    print(low,up,special,digit)
+                    return "Password should be of minimum length 8 and contain an uppercase and lowercase character and should be alphanumeric."
             else:
+                
                 return "Password should be of minimum length 8"
+            
 
 
     def value(idEnter, passEnter):
@@ -515,10 +516,11 @@ def table(round, radio_button_1, radio_button_2):
         line.grid (row = 4, column = 0, columnspan = 2, pady = 5)
 
         res = backend.defaulter_list()
+        y = 5
         try:
             for i in res:
-                global y
-                y = 5
+               
+                
                 def_list = Label(myFrame, text= "%-10s%-25s%-15s%-10s"%(i[0],i[1],i[2],i[3]) , relief = RAISED, fg = "white", bg ="#3b404e", bd = 0 , font = ("Calibri",12))
                 def_list.grid(row = y, column = 0, columnspan = 2, pady=1)
                 y += 1
@@ -630,8 +632,8 @@ button_image=Image.open("images/Rounded Button.png")
 button_image=button_image.resize((110,40),Image.ANTIALIAS)
 rounded_button=ImageTk.PhotoImage(button_image)
 
-# login_window(rounded_button)
-add_window(rounded_button)
+login_window(rounded_button)
+# add_window(rounded_button)
 
 
 

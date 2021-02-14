@@ -1,4 +1,4 @@
-from typing import Collection
+from typing import Collection, final
 import pymongo 
 import datetime
 uri = "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.ynusx.mongodb.net/admin?retryWrites=true&w=majority"
@@ -166,6 +166,7 @@ def defaulter():
                 dict1 = {"serial number":i["serial number"], "book name":bookname , "defaulter name": i["student name"], "due date": i["due date"], "number of days": delta.days, "fine" : fine }
                 z = collection1.insert_one(dict1)
 def defaulter_list():
+    defaulter()
     collection1 = database["defaulters"]
     x = collection1.find({})
     final = []
@@ -173,6 +174,7 @@ def defaulter_list():
         ls = [i["serial number"], i["defaulter name"], i["due date"], i["fine"]]
         final.extend([ls])
     return final
+
 
 "---------------------------------------------------------------------------------------------"
 
