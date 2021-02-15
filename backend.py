@@ -9,7 +9,16 @@ database = myclient["endsem"]
 def register_insert(username, password):
     collection = database["login"]
     dict1 = {"username" : username, "password": password}
-    x = collection.insert_one(dict1)
+    x= collection.count_documents({"$expr":{"$eq":["$username",str(username)]}})
+    if x==1:
+        return True
+    elif x==0:
+        x = collection.insert_one(dict1)
+        return False
+# test
+# m =register_insert("kanava","Kanavarora1505")
+# print(m)
+
 
 def login_data(username,password):
     x = database.login.count_documents({"$expr":{"$and":[{"$eq":["$username",str(username)]},{"$eq":["$password",str(password)]}]}})

@@ -123,8 +123,13 @@ def register_window(round):
         passval = passEnter.get()
         check = validity(idval,passval)
         if check==1:
-            backend.register_insert(idval, passval)
-        
+            out = backend.register_insert(idval, passval)
+            if out==True:
+                messagebox.showinfo("Failed","Username unavailable")
+            elif out==False:
+                messagebox.showinfo("Success","Registered Successfully")
+                login_window(round)
+
         else:
             messagebox.showinfo("Failed",check)
 
@@ -223,7 +228,7 @@ def add_window(round):
     author_name.grid(row = 2, column = 0,padx= 15, pady = 5)
 
     # Date Label
-    date_name = Label(myFrame, text = "Date \n (DD/MM/YYYY):", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 15)
+    date_name = Label(myFrame, text = "Date \n (YYYY-MM-DD):", relief = RAISED, fg = "white", bg = "#3b404e", bd=0 , font = ("Calibri",12), padx= 15)
     date_name.grid(row = 5, column = 0,padx= 15, pady = 5)
 
     # Price Label
