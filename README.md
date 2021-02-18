@@ -1,6 +1,8 @@
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
-https://img.shields.io/github/forks/Kanav-Arora/Library-Management-system?style=social
-https://img.shields.io/github/stars/Kanav-Arora/Library-Management-System?style=social
+
+[!GitHub forks](https://img.shields.io/github/forks/Kanav-Arora/Library-Management-system?style=social)
+
+[!Github stars](https://img.shields.io/github/stars/Kanav-Arora/Library-Management-System?style=social)
 
 # Library Management System
 ### **"In development phase"**
