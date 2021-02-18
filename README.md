@@ -4,6 +4,8 @@
 
 ![Github stars](https://img.shields.io/github/stars/Kanav-Arora/Library-Management-System?style=social)
 
+![Contributors](https://img.shields.io/github/contributors/Kanav-Arora/Library-Management-System?style=social)
+
 # Library Management System
 ### **"In development phase"**
 
@@ -26,4 +28,4 @@ Frames are linked in the following order: <br>
       * Return Book
       * Defaulters
 
-![Contributors](https://contrib.rocks/image?repo=Kanav-Arora/Library-Management-System "Our Contributors")
+
