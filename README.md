@@ -1,4 +1,4 @@
-![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)
 
 ![GitHub forks](https://img.shields.io/github/forks/Kanav-Arora/Library-Management-system?style=social)
 
