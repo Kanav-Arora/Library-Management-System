@@ -1,7 +1,7 @@
 from typing import Collection, final
 import pymongo 
 import datetime
-uri = "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.ynusx.mongodb.net/admin?retryWrites=true&w=majority"
+uri = "mongodb+srv://<username>:<password>@sandbox.ynusx.mongodb.net/admin?retryWrites=true&w=majority"
 myclient = pymongo.MongoClient(uri)
 database = myclient["endsem"]
 
