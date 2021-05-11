@@ -6,7 +6,7 @@
 
 ![Contributors](https://img.shields.io/github/contributors/Kanav-Arora/Library-Management-System?style=social)
 
-[![Hits-of-Code](https://hitsofcode.com/github/Kanav-Arora/Financify)](https://hitsofcode.com/github/Kanav-Arora/Financify/view?branch=main)
+[![Hits-of-Code](https://hitsofcode.com/github/Kanav-Arora/Financify?branch=main)](https://hitsofcode.com/github/Kanav-Arora/Financify/view?branch=main)
 
 
 
