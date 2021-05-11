@@ -6,6 +6,10 @@
 
 ![Contributors](https://img.shields.io/github/contributors/Kanav-Arora/Library-Management-System?style=social)
 
+![LinesOfCode](https://tokei.rs/b1/github/Kanav-Aroa/Library-Management-System)
+
+![FileCount](https://tokei.rs/b1/github/Kanav-Aroa/Library-Management-System?category=files)
+
 # Library Management System
 ### **"In development phase"**
 
