@@ -6,7 +6,8 @@
 
 ![Contributors](https://img.shields.io/github/contributors/Kanav-Arora/Library-Management-System?style=social)
 
-![](https://tokei.rs/b1/github/Kanav-Aroa/Library-Management-System)
+[![Hits-of-Code](https://hitsofcode.com/github/Kanav-Arora/Financify)](https://hitsofcode.com/github/Kanav-Arora/Financify/view?branch=main)
+
 
 
 # Library Management System
